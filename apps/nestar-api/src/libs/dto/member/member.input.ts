@@ -38,16 +38,4 @@ export class LoginInput {
 	@Length(5, 12)
 	@Field(() => String)
 	memberPassword: string;
-
-	@IsNotEmpty()
-	@Field(() => String)
-	memberPhone: string;
-
-	@IsOptional()
-	@Field(() => MemberType, { nullable: true })
-	memberType: MemberType;
-
-	@IsOptional()
-	@Field(() => MemberAuthType, { nullable: true })
-	memberAuthType?: MemberAuthType;
 }
