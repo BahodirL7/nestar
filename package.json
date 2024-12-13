@@ -41,7 +41,7 @@
 		"class-validator": "^0.14.0",
 		"graphql": "^16.8.1",
 		"graphql-upload": "^13.0.0",
-		"moment": "^2.29.4",
+		"moment": "^2.30.1",
 		"mongoose": "^8.0.0",
 		"reflect-metadata": "^0.1.13",
 		"rxjs": "^7.8.1",
