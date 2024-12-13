@@ -15,7 +15,8 @@ import { PropertyStatus } from '../../libs/enums/property.enum';
 import { ViewGroup } from '../../libs/enums/view.enum';
 import { ViewService } from '../view/view.service';
 import { PropertyUpdate } from '../../libs/dto/property/property.update';
-import moment from 'moment';
+import * as moment from 'moment';
+
 import { lookupMember, shapeIntoMongoObjectId } from '../../libs/config';
 
 @Injectable()
@@ -236,6 +237,14 @@ export class PropertyService {
 				modifier: -1,
 			});
 		}
+
+		return result;
+	}
+
+	public async removePropertyByAdmin(propertyId: ObjectId): Promise<Property> {
+		const search: T = { _id: propertyId, propertyStatus: PropertyStatus.DELETE };
+		const result = await this.propertyModel.findOneAndDelete(search).exec();
+		if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
 
 		return result;
 	}
