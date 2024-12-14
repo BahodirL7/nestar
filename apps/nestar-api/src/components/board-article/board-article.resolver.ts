@@ -80,10 +80,10 @@ export class BoardArticleResolver {
 	@Roles(MemberType.ADMIN)
 	@UseGuards(RolesGuard)
 	@Mutation((returns) => BoardArticle)
-	public async updateBoardArticlesByAdmin(@Args('input') input: BoardArticleUpdate): Promise<BoardArticle> {
+	public async updateBoardArticleByAdmin(@Args('input') input: BoardArticleUpdate): Promise<BoardArticle> {
 		console.log('Mutation: updateBoardArticlesByAdmin');
 		input._id = shapeIntoMongoObjectId(input._id);
-		return await this.boardArticleService.updateBoardArticlesByAdmin(input);
+		return await this.boardArticleService.updateBoardArticleByAdmin(input);
 	}
 
 	@Roles(MemberType.ADMIN)
