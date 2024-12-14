@@ -14,7 +14,6 @@ export enum BoardArticleStatus {
 	ACTIVE = 'ACTIVE',
 	DELETE = 'DELETE',
 }
-
 registerEnumType(BoardArticleStatus, {
 	name: 'BoardArticleStatus',
 });
