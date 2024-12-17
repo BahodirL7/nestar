@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsIn, IsNotEmpty, IsOptional, Length, Min } from 'class-validator';
+import { IsEnum, IsIn, IsNotEmpty, IsOptional, Length, Min } from 'class-validator';
 import { ObjectId } from 'mongoose';
 import { BoardArticleCategory, BoardArticleStatus } from '../../enums/board-article.enum';
 import { Direction } from '../../enums/common.enum';
@@ -31,6 +31,7 @@ export class BoardArticleInput {
 @InputType()
 class BAISearch {
 	@IsOptional()
+	@IsEnum(BoardArticleCategory)
 	@Field(() => BoardArticleCategory, { nullable: true })
 	articleCategory?: BoardArticleCategory;
 
@@ -76,6 +77,7 @@ class ABAISearch {
 	articleStatus?: BoardArticleStatus;
 
 	@IsOptional()
+	@IsEnum(BoardArticleCategory)
 	@Field(() => BoardArticleCategory, { nullable: true })
 	articleCategory?: BoardArticleCategory;
 }
