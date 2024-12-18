@@ -31,7 +31,6 @@ export class BoardArticleInput {
 @InputType()
 class BAISearch {
 	@IsOptional()
-	@IsEnum(BoardArticleCategory)
 	@Field(() => BoardArticleCategory, { nullable: true })
 	articleCategory?: BoardArticleCategory;
 
@@ -77,7 +76,6 @@ class ABAISearch {
 	articleStatus?: BoardArticleStatus;
 
 	@IsOptional()
-	@IsEnum(BoardArticleCategory)
 	@Field(() => BoardArticleCategory, { nullable: true })
 	articleCategory?: BoardArticleCategory;
 }

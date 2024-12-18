@@ -82,7 +82,7 @@ export class BoardArticleService {
 		if (articleStatus === BoardArticleStatus.DELETE) {
 			await this.memberService.memberStatsEditor({
 				_id: memberId,
-				targetKey: 'memberProperties',
+				targetKey: 'memberArticles',
 				modifier: -1,
 			});
 		}
@@ -130,10 +130,10 @@ export class BoardArticleService {
 	public async getAllBoardArticlesByAdmin(input: AllBoardArticlesInquiry): Promise<BoardArticles> {
 		const { articleStatus, articleCategory } = input.search;
 		const match: T = {};
-		const sort: T = { [input.sort ?? 'createdAt']: input.direction ?? Direction.DESC };
+		const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
 
 		if (articleStatus) match.articleStatus = articleStatus;
-		if (articleCategory) match.articleCategory = { $in: availableBoardArticleSorts };
+		if (articleCategory) match.articleCategory = articleCategory;
 
 		const result = await this.boardArticleModel
 			.aggregate([
@@ -152,9 +152,7 @@ export class BoardArticleService {
 				},
 			])
 			.exec();
-
 		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
-
 		return result[0];
 	}
 
@@ -182,7 +180,7 @@ export class BoardArticleService {
 
 	public async removeBoardArticleByAdmin(articleId: ObjectId): Promise<BoardArticle> {
 		const search: T = { _id: articleId, articleStatus: BoardArticleStatus.DELETE };
-		const result = await this.boardArticleModel.findOneAndDelete(search).exec();
+		const result = await this.boardArticleModel.findByIdAndDelete(search).exec();
 		if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
 
 		return result;
