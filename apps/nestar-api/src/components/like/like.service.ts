@@ -2,9 +2,6 @@ import { BadGatewayException, BadRequestException, Injectable } from '@nestjs/co
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Like } from '../../libs/dto/like/like';
-import { MemberService } from '../member/member.service';
-import { PropertyService } from '../property/property.service';
-import { BoardArticleService } from '../board-article/board-article.service';
 import { LikeInput } from '../../libs/dto/like/like.input';
 import { T } from '../../libs/types/common';
 import { Message } from '../../libs/enums/common.enum';
@@ -27,7 +24,7 @@ export class LikeService {
 				modifier = 1; // Like
 			} catch (err) {
 				console.error('Error, Service.model', err.message);
-				throw new BadRequestException('Create is failed!');
+				throw new BadRequestException(Message.CREATE_FAILED);
 			}
 		}
 
