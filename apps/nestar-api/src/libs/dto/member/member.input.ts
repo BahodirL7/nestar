@@ -62,7 +62,7 @@ export class AgentsInquiry {
 	limit: number;
 
 	@IsOptional()
-	@IsIn([availableAgentSorts])
+	@IsIn(availableAgentSorts)
 	@Field(() => String, { nullable: true })
 	sort?: string;
 
@@ -72,7 +72,7 @@ export class AgentsInquiry {
 
 	@IsNotEmpty()
 	@Field(() => AISearch)
-	search: AISearch;
+	search?: AISearch;
 }
 
 @InputType()
@@ -113,5 +113,5 @@ export class MembersInquiry {
 
 	@IsNotEmpty()
 	@Field(() => MISearch)
-	search: MISearch;
+	search?: MISearch;
 }
